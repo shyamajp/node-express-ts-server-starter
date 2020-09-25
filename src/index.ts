@@ -1,9 +1,26 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import mysql from 'mysql';
 require('dotenv').config();
 
 // use PORT inside /.env, if not, use 3000
 const port = process.env.PORT || 3000;
+
+// connect to mysql database
+const connection = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+})
+connection.connect((err) => {
+    if (err) {
+        console.error('error connecting to mysql: ' + err.stack);
+        return;
+    }
+
+    console.log('database connected as id ' + connection.threadId);
+});
 
 const app = express();
 
