@@ -1,16 +1,14 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 require('dotenv').config();
 
 // use PORT inside /.env, if not, use 3000
 const port = process.env.PORT || 3000;
 
 const app = express();
-const bodyParser = require("body-parser");
 
-// parse requests of content-type: application/json
+// parse requests of content-type: application/json, application/x-www-form-urlencoded
 app.use(bodyParser.json());
-
-// parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.send('Hello, World!'));
