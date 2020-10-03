@@ -1,27 +1,33 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-require('dotenv').config();
+import dotenv from "dotenv"
+dotenv.config()
 
-// use PORT inside /.env, if not, use 3000
-const port = process.env.PORT || 3000;
-// use MONGO_URI inside /.env, if not, use default localhost uri
-const mongo_uri: string = process.env.MONGO_URI || "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false";
-mongoose.connect(mongo_uri, {
+// import utils
+import middleware from "./middlewares";
+import { applyMiddleware } from "./utils";
+
+// import models
+require("./models/Item");
+
+// import routes
+const itemRoutes = require("./routes/itemRoutes");
+const healthRoutes = require("./routes/healthRoutes");
+
+const PORT: string | number = process.env.PORT || 3000;
+const MONGO_URI: string = process.env.MONGO_URI || "mongodb://localhost:27017/test";
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
 });
 
-const app = express();
+const app: express.Application = express();
 
-// parse requests of content-type: application/json, application/x-www-form-urlencoded
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => res.send('Hello, World!'));
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+applyMiddleware(middleware, app);
+itemRoutes(app);
+healthRoutes(app);
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
