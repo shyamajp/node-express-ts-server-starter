@@ -1,9 +1,9 @@
-import express, { Request, Response } from "express";
+import { Application, Request, Response } from "express";
 import mongoose from "mongoose";
 
 const Item = mongoose.model("items");
 
-module.exports = (app: express.Application) => {
+module.exports = (app: Application) => {
     app.get("/api/items", async (req: Request, res: Response) => {
         const items = await Item.find();
         res.send(items);

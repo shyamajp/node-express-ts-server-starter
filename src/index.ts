@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv"
 dotenv.config()
@@ -23,7 +23,7 @@ mongoose.connect(MONGO_URI, {
     useCreateIndex: true
 });
 
-const app: express.Application = express();
+const app: Application = express();
 
 applyMiddleware(middleware, app);
 itemRoutes(app);
