@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { IItem } from "../interfaces/Item";
 
 const itemSchema: Schema = new Schema({
     name: {
@@ -8,4 +9,4 @@ const itemSchema: Schema = new Schema({
     },
 })
 
-mongoose.model("items", itemSchema);
+mongoose.model<mongoose.Document & IItem>("items", itemSchema);
