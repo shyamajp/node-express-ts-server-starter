@@ -1,14 +1,10 @@
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv"
-// import utils
 import middleware from "./middlewares";
-import { applyMiddleware } from "./utils";
-// import models
-import "./models/Item";
-// import routes
-import itemRoutes from "./routes/itemRoutes";
-import healthRoutes from "./routes/healthRoutes";
+import { applyMiddleware, applyRoutes } from "./utils";
+import "./models";
+import routes from "./routes";
 
 dotenv.config()
 const PORT: string | number = process.env.PORT || 3000;
@@ -24,8 +20,7 @@ mongoose.connect(MONGO_URI, {
 const app: Application = express();
 
 applyMiddleware(middleware, app);
-itemRoutes(app);
-healthRoutes(app);
+applyRoutes(routes, app);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);

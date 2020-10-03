@@ -9,4 +9,4 @@ const itemSchema: Schema = new Schema({
     },
 })
 
-mongoose.model<mongoose.Document & IItem>("items", itemSchema);
+export default mongoose.model<mongoose.Document & IItem>("items", itemSchema);
