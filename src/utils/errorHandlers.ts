@@ -22,7 +22,7 @@ const clientError = (err: Error, res: Response, next: NextFunction) => {
         return res.status(400).send("Missing Schema Error: " + err.message);
     if (err instanceof MongooseError)
         return res.status(400).send("Mongoose Error: " + err.message);
-    return res.status(400).send(err.message)
+    return res.status(400).send(err.message);
 };
 
 export default { notFoundError, clientError };

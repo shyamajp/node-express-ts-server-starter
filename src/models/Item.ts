@@ -7,6 +7,6 @@ const itemSchema: Schema = new Schema({
         required: true,
         unique: true,
     },
-})
+});
 
 export default mongoose.model<mongoose.Document & IItem>("items", itemSchema);

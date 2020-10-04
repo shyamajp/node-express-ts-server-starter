@@ -12,7 +12,7 @@ export default (app: Application) => {
         } catch (err) {
             next(err);
         }
-    })
+    });
 
     router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -22,7 +22,7 @@ export default (app: Application) => {
         } catch (err) {
             next(err);
         }
-    })
+    });
 
     router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -32,7 +32,7 @@ export default (app: Application) => {
         } catch (err) {
             next(err);
         }
-    })
+    });
 
     router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -43,7 +43,7 @@ export default (app: Application) => {
         } catch (err) {
             next(err);
         }
-    })
+    });
 
     router.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -53,5 +53,5 @@ export default (app: Application) => {
         } catch (err) {
             next(err);
         }
-    })
-}
+    });
+};

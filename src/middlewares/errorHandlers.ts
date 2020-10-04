@@ -13,4 +13,4 @@ const handleClientErrors = (router: Application | Router) => {
     });
 };
 
-export default { handleNotFoundErrors, handleClientErrors }
+export default { handleNotFoundErrors, handleClientErrors };
