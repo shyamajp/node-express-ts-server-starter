@@ -1,7 +1,8 @@
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, response, Response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv"
 import middleware from "./middlewares";
+import errorHandlers from "./middlewares/errorHandlers";
 import { applyMiddleware, applyRoutes } from "./utils";
 import "./models";
 import routes from "./routes";
@@ -21,6 +22,7 @@ const app: Application = express();
 
 applyMiddleware(middleware, app);
 applyRoutes(routes, app);
+applyMiddleware(errorHandlers, app);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);

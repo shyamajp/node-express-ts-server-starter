@@ -1,4 +1,4 @@
 import itemRoutes from "./item/routes";
-import healthRoutes from "./health/routes";
+import commonRoutes from "./common/routes";
 
-export default [itemRoutes, healthRoutes];
+export default [itemRoutes, commonRoutes];
