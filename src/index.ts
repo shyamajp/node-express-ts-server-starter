@@ -1,18 +1,18 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-require('dotenv').config();
+import express, { Application } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import middleware from "./middlewares";
+import errorHandlers from "./middlewares/errorHandlers";
+import { applyMiddleware, applyRoutes } from "./utils";
+import routes from "./routes";
 
-// use PORT inside /.env, if not, use 3000
-const port = process.env.PORT || 3000;
+const app: Application = express();
 
-const app = express();
+applyMiddleware(middleware, app);
+applyRoutes(routes, app);
+applyMiddleware(errorHandlers, app);
 
-// parse requests of content-type: application/json, application/x-www-form-urlencoded
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => res.send('Hello, World!'));
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+const PORT: string | number = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
