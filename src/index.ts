@@ -1,35 +1,20 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mysql from 'mysql';
-require('dotenv').config();
+import express, { Application } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import middleware from "./middlewares";
+import errorHandlers from "./middlewares/errorHandlers";
+import { applyMiddleware, applyRoutes } from "./utils";
+import routes from "./routes";
+// connect to MySQL
+import "./services/db";
 
-// use PORT inside /.env, if not, use 3000
-const port = process.env.PORT || 3000;
+const app: Application = express();
 
-// connect to mysql database
-const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-})
-connection.connect((err) => {
-    if (err) {
-        console.error('error connecting to mysql: ' + err.stack);
-        return;
-    }
+applyMiddleware(middleware, app);
+applyRoutes(routes, app);
+applyMiddleware(errorHandlers, app);
 
-    console.log('database connected as id ' + connection.threadId);
-});
-
-const app = express();
-
-// parse requests of content-type: application/json, application/x-www-form-urlencoded
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => res.send('Hello, World!'));
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+const PORT: string | number = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
