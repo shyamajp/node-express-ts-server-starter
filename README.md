@@ -1,6 +1,14 @@
 # Node.js + Express + TypeScrypt server
 A basic Node.js + Express server using TypeScrypt.
-[Default page](http://localhost:8000) will return "Hello, World!"
+[Default page](http://localhost:3000) will return "Hello, World!" with some API endpoints using MySQL.
+
+## API endpoints
+`GET     /` - returns "Hello World!"  
+`GET     /items` - returns items  
+`GET     /items/:id` - returns item  
+`POST    /items` - creates item  
+`PUT     /items/:id` - modifies item   
+`POST    /items/:id` - deletes item
 
 # Getting started
 1. clone [this repository](https://github.com/shyamajp/node-express-ts-server-starter) by using   
@@ -13,6 +21,7 @@ A basic Node.js + Express server using TypeScrypt.
 ```
 NODE_ENV=development
 PORT=3000
+MONGO_URI = mongodb://localhost:27017/test
 ```
 3. make sure that you have .env in your `/.gitignore` so that your credentials will not be exposed to the public
 
