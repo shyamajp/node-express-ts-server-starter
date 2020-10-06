@@ -1,6 +1,6 @@
 # Node.js + Express + TypeScrypt server
 A basic Node.js + Express server using TypeScrypt.
-[Default page](http://localhost:3000) will return "Hello, World!" with some API endpoints using MySQL.
+[Default page](http://localhost:3000) will return "Hello, World!" with some basic API endpoints using MySQL.
 
 ## API endpoints
 `GET     /` - returns "Hello World!"  
